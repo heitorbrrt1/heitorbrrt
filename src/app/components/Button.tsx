@@ -1,12 +1,12 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react';
-import { IoMdSend } from 'react-icons/io';
+import React, { useState, useRef, useEffect } from 'react'
+import { IoMdSend } from 'react-icons/io'
 
 interface GradientButtonProps {
-  isSubmitting: boolean;
-  onClick?: () => void;
-  className?: string;
+  isSubmitting: boolean
+  onClick?: () => void
+  className?: string
 }
 
 const Button: React.FC<GradientButtonProps> = ({ 
@@ -14,40 +14,40 @@ const Button: React.FC<GradientButtonProps> = ({
   onClick,
   className = '' 
 }) => {
-  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
-  const [isHovered, setIsHovered] = useState(false);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const borderRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 })
+  const [isHovered, setIsHovered] = useState(false)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+  const borderRef = useRef<HTMLDivElement>(null)
  
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!buttonRef.current) return;
+    if (!buttonRef.current) return
    
-    const rect = buttonRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    const rect = buttonRef.current.getBoundingClientRect()
+    const x = ((e.clientX - rect.left) / rect.width) * 100
+    const y = ((e.clientY - rect.top) / rect.height) * 100
    
-    setMousePosition({ x, y });
-  };
+    setMousePosition({ x, y })
+  }
  
   const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
+    setIsHovered(true)
+  }
  
   const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+    setIsHovered(false)
+  }
  
   useEffect(() => {
-    if (!borderRef.current) return;
+    if (!borderRef.current) return
    
     if (isHovered) {
-      borderRef.current.style.clipPath = `circle(0% at ${mousePosition.x}% ${mousePosition.y}%)`;
-      borderRef.current.offsetHeight;
-      borderRef.current.style.clipPath = `circle(150% at ${mousePosition.x}% ${mousePosition.y}%)`;
+      borderRef.current.style.clipPath = `circle(0% at ${mousePosition.x}% ${mousePosition.y}%)`
+      borderRef.current.offsetHeight
+      borderRef.current.style.clipPath = `circle(150% at ${mousePosition.x}% ${mousePosition.y}%)`
     } else {
-      borderRef.current.style.clipPath = `circle(0% at ${mousePosition.x}% ${mousePosition.y}%)`;
+      borderRef.current.style.clipPath = `circle(0% at ${mousePosition.x}% ${mousePosition.y}%)`
     }
-  }, [isHovered, mousePosition]);
+  }, [isHovered, mousePosition])
 
   return (
     <div className='relative inline-flex'>
@@ -98,7 +98,7 @@ const Button: React.FC<GradientButtonProps> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

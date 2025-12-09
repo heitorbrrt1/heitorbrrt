@@ -1,12 +1,12 @@
 import React from 'react'
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { useApp } from '../context/AppContext';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { useApp } from '../context/AppContext'
 
 interface NavLinkPresenterProps {
-  name: string;
-  href: string;
-  isActive?: boolean;
-  onClick: (e: React.MouseEvent, id: string) => void;
+  name: string
+  href: string
+  isActive?: boolean
+  onClick: (e: React.MouseEvent, id: string) => void
 }
 
 const NavLinkPresenter: React.FC<NavLinkPresenterProps> = ({ 

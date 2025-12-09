@@ -100,30 +100,30 @@ export default function Technologies({
 
         <style>{`
           .slider {
-            height: calc(var(--height) + 2rem);
-            padding-top: 2rem;
-            mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
+            height: calc(var(--height) + 2rem)
+            padding-top: 2rem
+            mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent)
           }
           .slider:hover .item {
-            animation-play-state: paused !important;
+            animation-play-state: paused !important
           }
           .slider.paused .item {
-            animation-play-state: paused !important;
+            animation-play-state: paused !important
           }
           @keyframes autoRun {
             from {
-              left: 100%;
+              left: 100%
             }
             to {
-              left: calc(var(--width) * -1);
+              left: calc(var(--width) * -1)
             }
           }
           @keyframes reversePlay {
             from {
-              left: calc(var(--width) * -1);
+              left: calc(var(--width) * -1)
             }
             to {
-              left: 100%;
+              left: 100%
             }
           }
         `}</style>

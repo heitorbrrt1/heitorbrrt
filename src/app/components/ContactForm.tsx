@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Button from './Button'
 
 interface ContactFormProps {
-  onSubmitSuccess: () => void;
+  onSubmitSuccess: () => void
 }
 
 export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {

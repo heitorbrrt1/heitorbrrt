@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react'
 
 interface IntersectionObserverOptions {
-  root?: Element | null;
-  rootMargin?: string;
-  threshold?: number | number[];
-  once?: boolean;
+  root?: Element | null
+  rootMargin?: string
+  threshold?: number | number[]
+  once?: boolean
 }
 
 /**
@@ -20,43 +20,43 @@ export function useIntersectionObserver<T extends HTMLElement = HTMLElement>({
   threshold = 0,
   once = false,
 }: IntersectionObserverOptions = {}): [React.MutableRefObject<T | null>, boolean, IntersectionObserverEntry | null] {
-  const [isVisible, setIsVisible] = useState(false);
-  const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
-  const observedRef = useRef<T>(null);
-  const wasPreviouslyVisible = useRef(false);
+  const [isVisible, setIsVisible] = useState(false)
+  const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null)
+  const observedRef = useRef<T>(null)
+  const wasPreviouslyVisible = useRef(false)
 
   useEffect(() => {
-    const element = observedRef.current;
-    if (!element) return;
+    const element = observedRef.current
+    if (!element) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const isCurrentlyVisible = entry.isIntersecting;
+        const isCurrentlyVisible = entry.isIntersecting
         
         if (once && wasPreviouslyVisible.current && isCurrentlyVisible) {
-          return;
+          return
         }
         
-        setIsVisible(isCurrentlyVisible);
-        setEntry(entry);
+        setIsVisible(isCurrentlyVisible)
+        setEntry(entry)
         
         if (isCurrentlyVisible) {
-          wasPreviouslyVisible.current = true;
+          wasPreviouslyVisible.current = true
           
           if (once) {
-            observer.disconnect();
+            observer.disconnect()
           }
         }
       },
       { root, rootMargin, threshold }
-    );
+    )
 
-    observer.observe(element);
+    observer.observe(element)
 
     return () => {
-      observer.disconnect();
-    };
-  }, [root, rootMargin, threshold, once]);
+      observer.disconnect()
+    }
+  }, [root, rootMargin, threshold, once])
 
-  return [observedRef, isVisible, entry];
+  return [observedRef, isVisible, entry]
 }

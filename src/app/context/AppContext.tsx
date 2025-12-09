@@ -1,17 +1,17 @@
 'use client'
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react'
 
 interface AppContextType {
-  theme: 'light' | 'dark';
-  setTheme: (theme: 'light' | 'dark') => void;
+  theme: 'light' | 'dark'
+  setTheme: (theme: 'light' | 'dark') => void
   
-  activeSection: string;
-  setActiveSection: (section: string) => void;
+  activeSection: string
+  setActiveSection: (section: string) => void
   
-  notification: string | null;
-  showNotification: (message: string, duration?: number) => void;
-  clearNotification: () => void;
+  notification: string | null
+  showNotification: (message: string, duration?: number) => void
+  clearNotification: () => void
 }
 
 const defaultContext: AppContextType = {
@@ -22,31 +22,31 @@ const defaultContext: AppContextType = {
   notification: null,
   showNotification: () => {},
   clearNotification: () => {},
-};
+}
 
-const AppContext = createContext<AppContextType>(defaultContext);
+const AppContext = createContext<AppContextType>(defaultContext)
 
-export const useApp = () => useContext(AppContext);
+export const useApp = () => useContext(AppContext)
 
 interface AppProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
-  const [activeSection, setActiveSection] = useState('home');
-  const [notification, setNotification] = useState<string | null>(null);
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark')
+  const [activeSection, setActiveSection] = useState('home')
+  const [notification, setNotification] = useState<string | null>(null)
 
   const showNotification = (message: string, duration = 3000) => {
-    setNotification(message);
+    setNotification(message)
     setTimeout(() => {
-      setNotification(null);
-    }, duration);
-  };
+      setNotification(null)
+    }, duration)
+  }
 
   const clearNotification = () => {
-    setNotification(null);
-  };
+    setNotification(null)
+  }
 
   const value: AppContextType = {
     theme,
@@ -56,7 +56,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     notification,
     showNotification,
     clearNotification,
-  };
+  }
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
-};
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>
+}

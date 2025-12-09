@@ -4,7 +4,7 @@ import { OrbitControls, useAnimations, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 
 interface Model3DProps {
-  onLoaded?: () => void;
+  onLoaded?: () => void
 }
 
 function PlanetModel({ onLoaded }: { onLoaded?: () => void }) {
@@ -23,14 +23,14 @@ function PlanetModel({ onLoaded }: { onLoaded?: () => void }) {
     }
 
     if (scene) {
-        (scene as unknown as THREE.Scene).background = null;
+        (scene as unknown as THREE.Scene).background = null
       
         scene.traverse((child) => {
           if (child instanceof THREE.Mesh) {
-            child.material.side = THREE.DoubleSide;
-            child.frustumCulled = false;
+            child.material.side = THREE.DoubleSide
+            child.frustumCulled = false
           }
-        });
+        })
       }
 
     if (onLoaded) {

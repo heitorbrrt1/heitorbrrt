@@ -1,14 +1,14 @@
-import React from 'react';
-import { motion, Variants } from 'framer-motion';
+import React from 'react'
+import { motion, Variants } from 'framer-motion'
 
 interface AnimationOptions {
-  initial?: Record<string, any>;
-  animate?: Record<string, any>;
-  exit?: Record<string, any>;
-  transition?: Record<string, any>;
-  whileHover?: Record<string, any>;
-  whileTap?: Record<string, any>;
-  variants?: Variants;
+  initial?: Record<string, any>
+  animate?: Record<string, any>
+  exit?: Record<string, any>
+  transition?: Record<string, any>
+  whileHover?: Record<string, any>
+  whileTap?: Record<string, any>
+  variants?: Variants
 }
 
 const defaultAnimations: Record<string, AnimationOptions> = {
@@ -53,9 +53,9 @@ const defaultAnimations: Record<string, AnimationOptions> = {
     whileTap: { scale: 0.95 },
     transition: { duration: 0.2 }
   }
-};
+}
 
-type MotionElementType = 'div' | 'span' | 'button' | 'a' | 'p' | 'h1' | 'h2' | 'h3';
+type MotionElementType = 'div' | 'span' | 'button' | 'a' | 'p' | 'h1' | 'h2' | 'h3'
 
 /**
  * HOC para adicionar animações do Framer Motion a qualquer componente
@@ -71,9 +71,9 @@ export function withAnimation<P extends object>(
   return (props: P) => {
     const animationProps = typeof animationType === 'string' 
       ? defaultAnimations[animationType] || defaultAnimations.fadeIn
-      : animationType;
+      : animationType
 
-    const MotionComponent = motion[motionComponentType];
+    const MotionComponent = motion[motionComponentType]
 
     return (
       <MotionComponent
@@ -81,6 +81,6 @@ export function withAnimation<P extends object>(
       >
         <Component {...props} />
       </MotionComponent>
-    );
-  };
+    )
+  }
 }
