@@ -47,7 +47,7 @@ export default function Technologies({
   }
 
   return (
-    <div className='pb-8 md:pb-24 relative'>
+    <div className='relative'>
       <div
         className={`slider overflow-hidden ${modalOpen ? 'paused' : ''}`}
         style={{
@@ -55,7 +55,9 @@ export default function Technologies({
           '--height': `${adjustedHeight}px`,
           '--quantity': quantity,
           position: 'relative',
-          zIndex: 1
+          zIndex: 1,
+          height: `calc(${adjustedHeight}px + 2rem)`,
+          paddingTop: '2rem'
         } as React.CSSProperties}
       >
         <div className='list relative flex' style={{ minWidth: `${adjustedWidth * quantity}px` }}>
@@ -100,30 +102,28 @@ export default function Technologies({
 
         <style>{`
           .slider {
-            height: calc(var(--height) + 2rem)
-            padding-top: 2rem
-            mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent)
+            mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
           }
           .slider:hover .item {
-            animation-play-state: paused !important
+            animation-play-state: paused !important;
           }
           .slider.paused .item {
-            animation-play-state: paused !important
+            animation-play-state: paused !important;
           }
           @keyframes autoRun {
             from {
-              left: 100%
+              left: 100%;
             }
             to {
-              left: calc(var(--width) * -1)
+              left: calc(var(--width) * -1);
             }
           }
           @keyframes reversePlay {
             from {
-              left: calc(var(--width) * -1)
+              left: calc(var(--width) * -1);
             }
             to {
-              left: 100%
+              left: 100%;
             }
           }
         `}</style>

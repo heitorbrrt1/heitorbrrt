@@ -1,156 +1,182 @@
-'use client'
+import { ExternalLink, Github, Layers } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/app/lib/utils"
 
-import React, { useState, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { FaGithub, FaGlobe, FaTimes } from 'react-icons/fa'
-
-interface ProjectCardProps {
-  title: string
-  description: string
-  technologies: string[]
-  gitUrl?: string
-  webUrl?: string
+interface Project {
+  title: string;
+  description: string;
+  technologies: string[];
+  gitUrl?: string;
+  webUrl?: string;
+  isConnected?: boolean;
+  connectionPosition?: "first" | "last";
 }
 
-export function ProjectCard({
-  title,
-  description,
-  technologies,
-  gitUrl,
-  webUrl,
-}: ProjectCardProps) {
-  const [isHovered, setIsHovered] = useState(false)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const cardRef = useRef<HTMLDivElement>(null)
-  const [isOpen, setIsOpen] = useState(false)
-  const [gifSrc, setGifSrc] = useState<string | null>(null)
+interface ProjectCardProps {
+  project: Project;
+  index: number;
+}
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (cardRef.current) {
-      const rect = cardRef.current.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
-      setMousePosition({ x, y })
-    }
-  }
+type ProjectTheme = {
+  glow: string;
+  border: string;
+  badge: string;
+  techBg: string;
+  techHover: string;
+};
 
-  const handleMouseEnter = () => {
-    setIsHovered(true)
-  }
+type ProjectThemeExtended = ProjectTheme & {
+  titleHover: string;
+};
 
-  const handleMouseLeave = () => {
-    setIsHovered(false)
+function getProjectTheme(title: string): ProjectThemeExtended {
+  if (title.includes("Agro Óleo")) {
+    return {
+      glow: "shadow-[0_0_30px_hsl(var(--project-agrooleo)/0.3)]",
+      border: "hover:border-[hsl(var(--project-agrooleo)/0.6)] ring-1 ring-[hsl(var(--project-agrooleo)/0.2)]",
+      badge: "bg-[hsl(var(--project-agrooleo)/0.15)] border-[hsl(var(--project-agrooleo)/0.4)] text-[hsl(var(--project-agrooleo))]",
+      techBg: "bg-[hsl(var(--project-agrooleo)/0.1)]",
+      techHover: "group-hover:bg-[hsl(var(--project-agrooleo)/0.2)] group-hover:text-[hsl(var(--project-agrooleo))]",
+      titleHover: "group-hover:text-[hsl(var(--project-agrooleo))]",
+    };
   }
+  if (title.includes("Jul.ia")) {
+    return {
+      glow: "shadow-[0_0_30px_hsl(var(--project-julia-secondary)/0.3)]",
+      border: "hover:border-[hsl(var(--project-julia-secondary)/0.6)] ring-1 ring-[hsl(var(--project-julia-primary)/0.3)]",
+      badge: "bg-[hsl(var(--project-julia-primary)/0.3)] border-[hsl(var(--project-julia-secondary)/0.5)] text-[hsl(var(--project-julia-secondary))]",
+      techBg: "bg-[hsl(var(--project-julia-primary)/0.3)]",
+      techHover: "group-hover:bg-[hsl(var(--project-julia-primary)/0.5)] group-hover:text-[hsl(var(--project-julia-secondary))]",
+      titleHover: "group-hover:text-[hsl(var(--project-julia-secondary))]",
+    };
+  }
+  if (title.includes("FeelGood")) {
+    return {
+      glow: "shadow-[0_0_30px_hsl(var(--project-feelgood-primary)/0.3)]",
+      border: "hover:border-[hsl(var(--project-feelgood-primary)/0.6)] ring-1 ring-[hsl(var(--project-feelgood-secondary)/0.3)]",
+      badge: "bg-[hsl(var(--project-feelgood-secondary)/0.2)] border-[hsl(var(--project-feelgood-primary)/0.4)] text-[hsl(var(--project-feelgood-primary))]",
+      techBg: "bg-[hsl(var(--project-feelgood-secondary)/0.15)]",
+      techHover: "group-hover:bg-[hsl(var(--project-feelgood-secondary)/0.3)] group-hover:text-[hsl(var(--project-feelgood-primary))]",
+      titleHover: "group-hover:text-[hsl(var(--project-feelgood-primary))]",
+    };
+  }
+  if (title.includes("COpEsp")) {
+    return {
+      glow: "shadow-[0_0_30px_hsl(var(--project-copesp)/0.4)]",
+      border: "hover:border-[hsl(var(--project-copesp))] ring-1 ring-[hsl(var(--project-copesp)/0.4)]",
+      badge: "bg-[hsl(var(--project-copesp)/0.4)] border-[hsl(var(--project-copesp))] text-purple-300",
+      techBg: "bg-[hsl(var(--project-copesp)/0.3)]",
+      techHover: "group-hover:bg-[hsl(var(--project-copesp)/0.5)] group-hover:text-purple-600",
+      titleHover: "group-hover:text-[hsl(var(--project-copesp))]",
+    };
+  }
+  // Default theme
+  return {
+    glow: "",
+    border: "hover:border-glass-border/60",
+    badge: "",
+    techBg: "bg-secondary/80",
+    techHover: "group-hover:bg-secondary group-hover:text-foreground",
+    titleHover: "group-hover:text-primary",
+  };
+}
 
-  const openModal = () => {
-    setIsOpen(true)
-  }
-
-  const closeModal = () => {
-    setIsOpen(false)
-    setGifSrc(null)
-  }
+export function ProjectCard({ project, index }: ProjectCardProps) {
+  const isAgroOleo = project.title.includes("Agro Óleo");
+  const isFirst = project.connectionPosition === "first";
+  const isLast = project.connectionPosition === "last";
+  const theme = getProjectTheme(project.title);
 
   return (
-    <>
-      <div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        className='relative isolate'
-      >
-        <div className='absolute top-4 right-4 flex-col z-20'>
-          {webUrl && (
-            <a
-              href={webUrl}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='w-8 h-8 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all mb-1'
-              onClick={(e) => e.stopPropagation()}
-            >
-              <FaGlobe className='text-white text-lg' />
-            </a>
-          )}
-          {gitUrl && (
-            <a
-              href={gitUrl}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='w-8 h-8 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all'
-              onClick={(e) => e.stopPropagation()}
-            >
-              <FaGithub className='text-white text-lg' />
-            </a>
-          )}
-        </div>
+    <div
+      className={cn(
+        "group relative",
+        isFirst && "connected-line-right",
+        isLast && "connected-line-left"
+      )}
+      style={{ animationDelay: `${index * 100}ms` }}
+    >
 
-        {isHovered && (
-          <div
-            className='pointer-events-none absolute inset-0 rounded-2xl border border-white/20 transition-all duration-300 overflow-hidden'
-          >
-            <div
-              className='absolute w-[200%] h-[200%] -translate-x-1/2 -translate-y-1/2 opacity-60'
-              style={{
-                top: mousePosition.y,
-                left: mousePosition.x,
-                background: 'radial-gradient(circle closest-side, rgba(40,100,226,0.8), transparent)',
-              }}
-            />
+      {/* Card */}
+      <div
+        className={cn(
+          "relative h-full rounded-xl p-6 transition-all duration-300",
+          "bg-glass/60 backdrop-blur-xl border border-glass-border/30",
+          "hover:bg-glass/80",
+          "group-hover:-translate-y-1",
+          theme.border,
+          theme.glow && `hover:${theme.glow}`
+        )}
+      >
+        {/* Connected badge for Agro Óleo */}
+        {isAgroOleo && (
+          <div className="absolute -top-3 left-6">
+            <Badge
+              variant="outline"
+              className={cn("text-xs font-mono bg-black!", theme.badge)}
+            >
+              <Layers className="w-3 h-3 mr-1" />
+              Full-Stack System
+            </Badge>
           </div>
         )}
 
-        <motion.div
-          onClick={openModal}
-          whileTap={{ scale: 0.98 }}
-          className='bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg p-6 cursor-pointer relative z-10 flex flex-col h-full group transition-all duration-300 hover:border-blue-400/30'
-        >
-          <div className='flex flex-col h-full'>
-            <h2 className='text-xl font-bold text-white mb-2'>{title}</h2>
-            <p className='text-gray-200 mb-4 flex-1'>{description}</p>
-
-            <div className='flex flex-wrap gap-2 mt-auto'>
-              {technologies.map((tech) => (
-                <span
-                  key={tech}
-                  className='px-2 py-1 text-sm font-medium text-blue-500 hover:text-blue-500/50 rounded-full bg-neutral-900/50 cursor-default'
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
-      {isOpen && (
-        <div
-          className='fixed inset-0 flex items-center justify-center z-50 bg-black/20 bg-opacity-90 backdrop-blur-sm'
-          onClick={closeModal}
-        >
-          <div
-            className='relative bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg p-4 max-w-3xl w-full mx-4'
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={closeModal}
-              className='absolute top-4 right-4 p-2 bg-black/50 rounded-full hover:bg-black/70 transition-colors z-50'
-            >
-              <FaTimes className='text-white text-xl w-6 h-6' />
-            </button>
-
-            <div className='rounded'>
-              {gifSrc && (
-                <img
-                  src={gifSrc}
-                  alt='Demonstração do projeto'
-                  className='w-full h-full object-contain rounded-md'
-                />
-              )}
-            </div>
+        {/* Header */}
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <h3 className={cn(
+            "text-lg font-semibold text-foreground transition-colors",
+            theme.titleHover
+          )}>
+            {project.title}
+          </h3>
+          <div className="flex gap-2 shrink-0">
+            {project.gitUrl && (
+              <a
+                href={project.gitUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                aria-label="View GitHub repository"
+              >
+                <Github className="w-4 h-4" />
+              </a>
+            )}
+            {project.webUrl && (
+              <a
+                href={project.webUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-secondary/50 text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+                aria-label="View live project"
+              >
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            )}
           </div>
         </div>
-      )}
-    </>
-  )
+
+        {/* Description */}
+        <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+          {project.description}
+        </p>
+
+        {/* Technologies */}
+        <div className="flex flex-wrap gap-2">
+          {project.technologies.map((tech) => (
+            <span
+              key={tech}
+              className={cn(
+                "px-2.5 py-1 text-xs font-mono rounded-md transition-colors",
+                "text-muted-foreground",
+                theme.techBg,
+                theme.techHover
+              )}
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }

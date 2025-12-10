@@ -12,7 +12,7 @@ export default function ContactSection() {
     setSubmitted(true)
   }
   return (
-    <section className='py-16'>
+    <section>
       <motion.h2 
         whileInView={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: -100 }}

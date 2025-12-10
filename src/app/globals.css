@@ -1,7 +1,169 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
-:root {
-    font-family: 'Inter', sans-serif;
-    background-color: black;
+@layer base {
+  :root {
+    --background: 220 20% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 220 20% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 220 20% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 160 84% 45%;
+    --primary-foreground: 220 20% 6%;
+
+    --secondary: 220 20% 14%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 20% 18%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 280 85% 65%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 160 84% 45%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --glass-bg: 220 20% 12%;
+    --glass-border: 220 20% 22%;
+    --glow-primary: 160 84% 45%;
+    --glow-accent: 280 85% 65%;
+    --gradient-primary: linear-gradient(135deg, hsl(160 84% 45%), hsl(180 70% 35%));
+    --gradient-accent: linear-gradient(135deg, hsl(280 85% 65%), hsl(320 80% 55%));
+    --gradient-card: linear-gradient(145deg, hsl(220 20% 12% / 0.8), hsl(220 20% 8% / 0.6));
+
+    /* Project colors */
+    --project-agrooleo: 356 79% 47%;
+    --project-julia-primary: 213 51% 18%;
+    --project-julia-secondary: 203 37% 82%;
+    --project-feelgood-primary: 153 96% 45%;
+    --project-feelgood-secondary: 153 100% 35%;
+    --project-copesp: 245 22% 25%;
+
+    --sidebar-background: 220 20% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 160 84% 45%;
+    --sidebar-primary-foreground: 220 20% 6%;
+    --sidebar-accent: 220 20% 14%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 220 20% 18%;
+    --sidebar-ring: 160 84% 45%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background-color: hsl(var(--glass-bg) / 0.6);
+    backdrop-filter: blur(24px);
+    border: 1px solid hsl(var(--glass-border) / 0.3);
+  }
+
+  .glass-strong {
+    background-color: hsl(var(--glass-bg) / 0.8);
+    backdrop-filter: blur(40px);
+    border: 1px solid hsl(var(--glass-border) / 0.5);
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.4);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 40px -10px hsl(var(--accent) / 0.4);
+  }
+
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+  }
+
+  .connected-line-right::after {
+    content: '';
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2rem;
+    height: 2px;
+    background: linear-gradient(90deg, hsl(var(--project-agrooleo) / 0.8), hsl(var(--project-agrooleo) / 0.3));
+  }
+
+  .connected-line-left::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2rem;
+    height: 2px;
+    background: linear-gradient(90deg, hsl(var(--project-agrooleo) / 0.3), hsl(var(--project-agrooleo) / 0.8));
+  }
+
+  @media (max-width: 768px) {
+    .connected-line-right::after,
+    .connected-line-left::before {
+      display: none;
+    }
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }

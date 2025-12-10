@@ -6,6 +6,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useAnimations, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import { useRef, Suspense } from 'react'
+import { ChevronDown } from 'lucide-react'
 
 const cv = "/Curriculum Heitor Barreto Bonfim.pdf"
 
@@ -55,7 +56,7 @@ function PlanetModel() {
     }
   })
 
-  return <primitive ref={planetRef} object={scene} scale={2} />
+  return <primitive ref={planetRef} object={scene} scale={2.3} />
 }
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false)
@@ -99,11 +100,10 @@ export default function HeroSection() {
                 {devSkills.map((skill, index) => (
                   <div
                     key={index}
-                    className={`transition-all duration-500 ease-in-out ${
-                      index === activeIndex
-                        ? 'bg-linear-to-r from-[#00EE6E] to-[#0C75E6] bg-clip-text text-transparent py-2 origin-left'
-                        : 'text-neutral-100 opacity-10 bg-clip-text'
-                    }`}
+                    className={`transition-all duration-500 ease-in-out ${index === activeIndex
+                      ? 'bg-linear-to-r from-[#00EE6E] to-[#0C75E6] bg-clip-text text-transparent py-2 origin-left'
+                      : 'text-neutral-100 opacity-10 bg-clip-text'
+                      }`}
                   >
                     <span className='text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight'>
                       {skill}
@@ -128,12 +128,28 @@ export default function HeroSection() {
           )}
         </div>
 
-        <div className='mt-12 lg:mt-16 flex flex-col sm:flex-row items-center lg:items-start'>
+        <div className='mt-12 lg:mt-16 flex flex-col sm:flex-row items-center lg:items-start gap-4'>
           <a
             href={cv}
             className='px-6 py-3 bg-linear-to-r from-[#00EE6E] to-[#0C75E6] rounded-full text-white font-medium hover:scale-105 transition-transform shadow-lg'
           >
             Acessar currículo
+          </a>
+          <a
+            href='/#contato'
+            className='px-6 py-3 bg-linear-to-r from-neutral-800 to-neutral-700 rounded-full text-neutral-200 font-medium hover:scale-105 hover:from-neutral-700 hover:to-neutral-600 transition-all shadow-lg border border-neutral-600/50'
+          >
+            Entre em contato
+          </a>
+        </div>
+
+        <div className="mt-16 lg:mt-12 flex justify-center">
+          <a
+            href="#projects"
+            className="inline-flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors group"
+          >
+            <span className="text-sm font-mono">Ver projetos</span>
+            <ChevronDown className="w-5 h-5 animate-bounce" />
           </a>
         </div>
       </div>
