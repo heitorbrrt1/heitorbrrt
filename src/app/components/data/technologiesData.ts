@@ -4,7 +4,11 @@ import { RiReactjsLine } from 'react-icons/ri'
 import { TbBrandNextjs } from 'react-icons/tb'
 import { FaNodeJs } from 'react-icons/fa'
 import { BiLogoPostgresql } from 'react-icons/bi'
-import { SiTailwindcss, SiDjango, SiDocker, SiGit, SiGithub, SiJira, SiNotion } from 'react-icons/si'
+import { 
+  SiTailwindcss, SiDjango, SiDocker, SiGit, SiGithub, SiJira, SiNotion,
+  SiReactquery, SiExpo, SiKotlin, SiGooglemaps 
+} from 'react-icons/si'
+import { TbBrandReactNative } from 'react-icons/tb'
 import { FigmaIcon } from '../icons/Figma'
 
 export interface TechItem {
@@ -22,6 +26,18 @@ export const icons: TechItem[] = [
     description: 'Biblioteca JavaScript para construir interfaces de usuário com componentes reutilizáveis e reatividade eficiente.'
   },
   {
+    icon: TbBrandReactNative,
+    color: 'text-sky-500',
+    name: 'React Native',
+    description: 'Desenvolvimento de aplicações mobile nativas para iOS e Android utilizando uma base de código única.'
+  },
+  {
+    icon: SiReactquery,
+    color: 'text-red-500',
+    name: 'TanStack Query',
+    description: 'Gerenciamento de estado assíncrono e cache, garantindo sincronização eficiente entre o app mobile e o backend.'
+  },
+  {
     icon: TbBrandNextjs,
     color: '',
     name: 'Next.js',
@@ -33,6 +49,13 @@ export const icons: TechItem[] = [
     name: 'Node.js',
     description: 'Ambiente de execução JavaScript server-side que permite construir aplicações de rede escaláveis.'
   },
+  {
+    icon: SiExpo,
+    color: 'text-slate-100',
+    name: 'Expo',
+    description: 'Plataforma e framework para acelerar o desenvolvimento, build e deploy de aplicativos React Native de alta performance.'
+  },
+
   {
     icon: BiLogoPostgresql,
     color: 'text-sky-700',
