@@ -15,7 +15,7 @@ export const experiences: Experience[] = [
     role: 'Desenvolvedor FullStack',
     company: 'CodeTower',
     location: 'Anápolis, Brasil',
-    period: '04/2023 – 01/2025',
+    period: '04/2023 - 01/2025',
     type: 'dev',
     highlights: [
       'Iniciei com back-end em Python, Django e Docker para APIs escaláveis',
@@ -29,7 +29,7 @@ export const experiences: Experience[] = [
     role: 'Vice Presidente',
     company: 'CodeTower',
     location: 'Anápolis, Brasil',
-    period: '01/2024 – 01/2025',
+    period: '01/2024 - 01/2025',
     type: 'leadership',
     highlights: [
       'Liderança estratégica definindo metas e impulsionando o crescimento da empresa',
@@ -42,7 +42,7 @@ export const experiences: Experience[] = [
     role: 'Engenheiro de Software',
     company: 'AID4CARE',
     location: 'Goiânia, Brasil',
-    period: '09/2024 – 04/2025',
+    period: '09/2024 - 04/2025',
     type: 'dev',
     highlights: [
       'Foco na criação de interfaces interativas e responsivas com React e TypeScript',
@@ -56,7 +56,7 @@ export const experiences: Experience[] = [
     role: 'Engenheiro de Software Full Stack & DevOps',
     company: 'Agro Óleo',
     location: 'Unaí-MG (Remoto)',
-    period: '09/2025 – 12/2025',
+    period: '09/2025 - 12/2025',
     type: 'devops',
     highlights: [
       'Desenvolvi aplicação completa com Next.js e Django REST, implementando arquitetura BFF com segurança avançada',

@@ -1,6 +1,6 @@
 import { ExternalLink, Github, Layers } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/app/lib/utils"
+import { Badge } from "@/app/components/badge";
+import { cn } from "@/lib/utils";
 
 interface Project {
   title: string;
