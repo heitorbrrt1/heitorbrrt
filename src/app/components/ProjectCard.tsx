@@ -40,6 +40,16 @@ function getProjectTheme(title: string): ProjectThemeExtended {
       titleHover: "group-hover:text-[hsl(var(--project-agrooleo))]",
     };
   }
+  if (title.includes("Frequência") || title.includes("Transporte")) {
+    return {
+      glow: "shadow-[0_0_30px_hsl(var(--project-school)/0.3)]",
+      border: "hover:border-[hsl(var(--project-school)/0.6)] ring-1 ring-[hsl(var(--project-school)/0.2)]",
+      badge: "bg-[hsl(var(--project-school)/0.15)] border-[hsl(var(--project-school)/0.4)] text-[hsl(var(--project-school))]",
+      techBg: "bg-[hsl(var(--project-school)/0.1)]",
+      techHover: "group-hover:bg-[hsl(var(--project-school)/0.2)] group-hover:text-[hsl(var(--project-school))]",
+      titleHover: "group-hover:text-[hsl(var(--project-school))]",
+    };
+  }
   if (title.includes("Jul.ia")) {
     return {
       glow: "shadow-[0_0_30px_hsl(var(--project-julia-secondary)/0.3)]",
@@ -83,16 +93,32 @@ function getProjectTheme(title: string): ProjectThemeExtended {
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
   const isAgroOleo = project.title.includes("Agro Óleo");
+  const isSchool = project.title.includes("Frequência") || project.title.includes("Transporte");
   const isFirst = project.connectionPosition === "first";
   const isLast = project.connectionPosition === "last";
   const theme = getProjectTheme(project.title);
+
+  const rightClass = isFirst
+    ? isAgroOleo
+      ? "connected-line-right"
+      : isSchool
+      ? "connected-line-right-school"
+      : undefined
+    : undefined;
+  const leftClass = isLast
+    ? isAgroOleo
+      ? "connected-line-left"
+      : isSchool
+      ? "connected-line-left-school"
+      : undefined
+    : undefined;
 
   return (
     <div
       className={cn(
         "group relative",
-        isFirst && "connected-line-right",
-        isLast && "connected-line-left"
+        rightClass,
+        leftClass
       )}
       style={{ animationDelay: `${index * 100}ms` }}
     >

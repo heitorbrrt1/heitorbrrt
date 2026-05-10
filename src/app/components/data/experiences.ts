@@ -65,4 +65,27 @@ export const experiences: Experience[] = [
     ],
     technologies: ['Next.js', 'Django REST', 'Docker', 'Nginx', 'PostgreSQL'],
   },
+  {
+    id: 'face-control-m',
+    role: 'Engenheiro de Software Mobile',
+    company: 'Face Control M',
+    location: 'Anápolis-GO (Remoto)',
+    period: '12/2025 - 04/2026',
+    type: 'dev',
+    highlights: [
+      'Desenvolvi o frontend de dois aplicativos mobile para gestão de transporte escolar, atualmente em produção e utilizados por diversas escolas no estado de Goiás',
+      'Aplicativo Responsáveis: Implementei a interface de acompanhamento de rotas em tempo real via APIs geográficas, além de funcionalidades de gestão como cardápio escolar, agenda de atividades e sistema de justificativa de ausências',
+      'Aplicativo Motoristas: Desenvolvi a interface operacional para seleção de rotas e controle de embarque, integrando um módulo nativo em Kotlin para navegação assistida via Google Navigation sem sair do app',
+      'Arquitetura e Sincronização: Estruturei o consumo de APIs utilizando TanStack Query para gerenciamento de cache e atualizações automáticas, garantindo que os dados de logística estivessem sempre sincronizados entre motoristas e responsáveis',
+      'Segurança e Resiliência: Implementei fluxos de autenticação robustos com JWT e persistência local, assegurando o funcionamento das funcionalidades críticas mesmo em cenários de conectividade instável'
+    ],
+    technologies: [
+      'React Native',
+      'Expo',
+      'TypeScript',
+      'Kotlin',
+      'TanStack Query',
+      'Google Maps API'
+    ],
+  },
 ];

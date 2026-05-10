@@ -64,11 +64,11 @@ export default function HeroSection() {
   const isMobile = useIsMobile()
 
   const devSkills = [
-    'Desenvolvimento Front-end',
-    'Criação de APIs RESTful',
-    'Arquitetura de Banco de Dados',
-    'Integração de Sistemas',
-    'DevOps e CI/CD'
+    'Engenharia de Software Full Stack',
+    'Desenvolvimento Mobile Nativo & Híbrido',
+    'Arquitetura de Sistemas Escaláveis',
+    'Soluções Logísticas e Operacionais',
+    'Infraestrutura Cloud e DevOps'
   ]
 
   useEffect(() => {

@@ -31,5 +31,17 @@ export const PROJECTS = [
         technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Zod'],
         webUrl: 'https://feelgoodstore.vercel.app'
     },
+    {
+        title: 'Frequência Escolar',
+        description: 'Desenvolvi um aplicativo mobile completo para pais acompanharem a rotina escolar e segurança dos filhos. As funcionalidades incluem monitoramento de rotas de ônibus em tempo real via GPS, consulta de cardápio escolar, agenda mensal de atividades e um sistema crítico de justificativa de ausências, permitindo que os pais notifiquem faltas diretamente pela plataforma.',
+        technologies: ['React Native', 'Expo', 'TanStack Query', 'Google Maps API', 'TypeScript'],
+        webUrl: 'https://play.google.com/store/apps/details?id=com.controlm.frequenciaescolar' // URL de produção citada no serviço de API
+    },
+    {
+        title: 'Transporte Escolar',
+        description: 'Desenvolvi uma ferramenta operacional para motoristas de transporte escolar com foco em eficiência logística. O app permite a seleção e gestão de rotas dinâmicas, visualização de alunos por parada e uma integração nativa avançada para navegação GPS (Google Navigation) dentro do próprio aplicativo, garantindo que o motorista realize o trajeto sem a necessidade de alternar entre apps externos.',
+        technologies: ['React Native', 'Expo', 'TanStack Query', 'Kotlin (Native Modules)', 'TypeScript'],
+        
+    },
 
 ]

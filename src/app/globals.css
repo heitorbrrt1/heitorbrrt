@@ -50,6 +50,7 @@
     --project-feelgood-primary: 153 96% 45%;
     --project-feelgood-secondary: 153 100% 35%;
     --project-copesp: 245 22% 25%;
+    --project-school: 222 68% 47%;
 
     --sidebar-background: 220 20% 8%;
     --sidebar-foreground: 210 40% 98%;
@@ -142,9 +143,33 @@
     background: linear-gradient(90deg, hsl(var(--project-agrooleo) / 0.3), hsl(var(--project-agrooleo) / 0.8));
   }
 
+  .connected-line-right-school::after {
+    content: '';
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2rem;
+    height: 2px;
+    background: linear-gradient(90deg, hsl(var(--project-school) / 0.8), hsl(var(--project-school) / 0.3));
+  }
+
+  .connected-line-left-school::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2rem;
+    height: 2px;
+    background: linear-gradient(90deg, hsl(var(--project-school) / 0.3), hsl(var(--project-school) / 0.8));
+  }
+
   @media (max-width: 768px) {
     .connected-line-right::after,
-    .connected-line-left::before {
+    .connected-line-left::before,
+    .connected-line-right-school::after,
+    .connected-line-left-school::before {
       display: none;
     }
   }
